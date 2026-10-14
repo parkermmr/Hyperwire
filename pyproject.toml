@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hyperwire"
+version = "1.0.0"
+description = "Async event pipelines wired with >>: backpressure, parallel workers, shared state and remote compute stages"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "Parker" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Framework :: AsyncIO",
+    "Topic :: System :: Distributed Computing",
+]
+dependencies = []
+
+[project.optional-dependencies]
+kafka = ["plyght[kafka]>=1.0"]
+s3 = ["plyght[s3]>=1.0"]
+all = ["plyght[kafka,s3]>=1.0"]
+extended = ["plyght[kafka,s3]>=1.0"]
+dev = ["pytest>=8", "pytest-cov>=5"]
+
+[project.urls]
+Homepage = "https://github.com/parkermmr/hyperwire"
+Issues = "https://github.com/parkermmr/hyperwire/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hyperwire"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["hyperwire"]
+branch = true
